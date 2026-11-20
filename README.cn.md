@@ -41,6 +41,8 @@ Chrome 和 Edge 会自己插入一行，标题是扩展名 **Aria2 Explorer**。
 3. 打开开发者模式。
 4. 选择「加载未打包的扩展程序」，选中本目录。
 
+本分支的打包文件是 `dist/Aria2-Explorer.crx`。签名用的私钥不在仓库里。现在的 Chrome 和 Edge 会拒绝不是从它们的商店下载的 CRX，把文件拖进扩展页可能出现缺少商店签名的错误。出现这种情况时，用「加载未打包的扩展程序」。这个包的扩展 id 是 `opnhjpcmcbfpcnkpegecedkdekkgppda`。以后如果不用同一把私钥重新打包，id 会变。
+
 ## 键盘快捷键
 
 - **Alt + A**：开关下载拦截

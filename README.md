@@ -41,6 +41,8 @@ Load this fork as an unpacked extension:
 3. Turn on Developer mode.
 4. Choose "Load unpacked" and select this directory.
 
+A packed file for this branch is `dist/Aria2-Explorer.crx`. The private key that signed it is not in the repository. Current Chrome and Edge reject a CRX that did not come from their stores, so drag-and-drop can fail with a store-proof error. When that happens, use Load unpacked. This package's extension id is `opnhjpcmcbfpcnkpegecedkdekkgppda`. A later pack without the same key gets a different id.
+
 ## Keyboard shortcuts
 
 - **Alt + A**: Toggle download capture

@@ -1,0 +1,2 @@
+# Chrome extension signing keys. Do not commit these.
+*.pem
