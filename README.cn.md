@@ -1,127 +1,77 @@
 # Aria2 Explorer
 
-<div align="center">
+[English](./README.md)
 
-![Logo](images/logo128.png)
+这是 [Alex Hua 的 Aria2 Explorer](https://github.com/alexhua/Aria2-Explorer) 的个人分支。
 
-**功能强大的 Chrome 扩展，无缝集成 Aria2 下载管理器**
+这是一个 Chrome / Edge 扩展，把浏览器下载交给 aria2，并带有 AriaNg 界面来管理任务。它连接本地 aria2 RPC（通常是 `127.0.0.1:6800`）。下载目录来自 aria2，而不是写死在扩展里的路径。
 
-[![Chrome 应用商店](https://img.shields.io/badge/Chrome-应用商店-red?logo=google-chrome)](https://chromewebstore.google.com/detail/mpkodccbngfoacfalldjimigbofkhgjn)
-[![许可证](https://img.shields.io/badge/license-BSD--3--Clause-green.svg)](LICENSE)
-[![版本](https://img.shields.io/github/v/release/alexhua/Aria2-Explorer.svg?color=gold)](manifest.json)
+## 本分支的改动
 
-[English](./README.md) | [中文](#中文)
+### 打开下载目录
 
-</div>
+任务旁边的文件夹按钮打开该任务在 aria2 中的目录。界面已经从任务状态拿到 `dir`（任务自己没有设置目录时，就是 aria2 的全局 `dir`）。按钮使用这个路径，不会提示安装 DownHub。
 
----
+在 Windows 上，如果该 RPC 配置没有保存自定义的「Download Folder Open Handler URL」，按钮通过 Windows 自带的 `search-ms` 协议，让资源管理器打开这个目录。不需要再安装别的程序。第一次点击时，Chrome 或 Edge 可能会询问是否打开外部应用；允许之后，资源管理器会显示该文件夹。
 
-## 📖 简介
+如果 RPC 配置里已经保存了自定义的打开处理 URL，仍然使用那个 URL。处理失败时，不再弹出安装 DownHub 的对话框。
 
-Aria2 Explorer 是一款功能强大的 Chrome 扩展，可将 Aria2 下载管理器无缝集成到浏览器中。它能自动捕获下载、监控 Aria2 状态，并提供美观的 Web UI 来管理您的下载任务。
+本地 Windows RPC 的任务详情页里，Download Dir 链接使用同一个地址。
 
-## ✨ 核心功能
+### 工具栏图标右键菜单
 
-### 🎯 智能下载捕获
-- **自动拦截**：根据文件大小和类型自动捕获浏览器下载
-- **灵活过滤**：支持域名和文件扩展名的白名单/黑名单
-- **Alt 键覆盖**：按住 Alt 键点击可绕过捕获
-- **多 URL 支持**：同时处理多个下载链接
+本分支不再添加 **启动Aria2**（Start Aria2），也不再注册 Alt+X 快捷键。工具栏菜单里仍然保留打开主界面、下载拦截、状态监测、网站过滤和 RPC 选择。
 
-### 📊 实时监控
-- **实时状态**：监控活动、等待和已完成的任务
-- **速度显示**：在徽章中实时显示上传/下载速度
-- **多服务器**：支持监控多个 Aria2 服务器
-- **智能间隔**：根据活动状态自适应轮询
+Chrome 和 Edge 会自己插入一行，标题是扩展名 **Aria2 Explorer**。这一行打开 manifest 里的 `homepage_url`。本分支把它设为 https://github.com/worrysprite/Aria2-Explorer ，所以浏览器自带的这一行会打开本仓库。扩展不会再添加一个同名菜单项。
 
-### 🎨 精美界面
-- **集成 WebUI**：内置 AriaNg 界面
-- **多种模式**：可作为弹窗、标签页、窗口或侧边栏打开
-- **深色模式**：跟随系统主题自动切换
-- **动画图标**：下载状态的视觉反馈
+## 扩展做什么
 
-### 🔧 高级配置
-- **多 RPC 服务器**：配置并在多个服务器间切换
-- **模式匹配**：根据 URL 模式自动选择服务器
-- **Cookie 支持**：自动转发 Cookie 用于需要认证的下载
-- **自定义请求头**：为下载请求添加自定义请求头
+- 按文件大小拦截浏览器下载，并支持域名和扩展名的允许/阻止列表。按住 Alt 再点击链接可以跳过拦截。
+- 监测一个或多个 aria2，并可以在工具栏图标上显示速度和任务数量。
+- 以内置 AriaNg 界面打开，方式可以是弹窗、标签页、窗口或侧边栏。
+- 从页面右键菜单把链接、选中文本或当前页的链接导出到 aria2。
+- 可以接收其他扩展发来的下载请求。
 
-### 🌐 右键菜单集成
-- **快速导出**：右键点击链接发送到 Aria2
-- **批量导出**：导出当前页面的所有链接
-- **网站过滤**：快速添加/移除网站到白名单/黑名单
-- **服务器选择**：从右键菜单选择目标服务器
+## 安装
 
-### 🔔 智能通知
-- **任务状态**：下载完成/错误时获得通知
-- **静音模式**：可选的静音通知
-- **自定义消息**：通知中显示详细上下文
-- **点击操作**：点击通知打开 WebUI
+以未打包扩展的方式加载本分支：
 
-## 🚀 安装
+1. 克隆本仓库。
+2. 打开 `chrome://extensions` 或 `edge://extensions`。
+3. 打开开发者模式。
+4. 选择「加载未打包的扩展程序」，选中本目录。
 
-### 从 Chrome 网上应用店安装（推荐）
+## 键盘快捷键
 
-[![Chrome Web Store](https://aria2e.com/assets/badges/chrome-web-store.png)](https://chromewebstore.google.com/detail/mpkodccbngfoacfalldjimigbofkhgjn)
-<a href="https://microsoftedge.microsoft.com/addons/detail/ngojgbdekanmijaphecgpmfoegoanffi"><img src="https://aria2e.com/assets/badges/microsoft-en-light.svg" alt="Edge Add-ons Store" height="59"></a>
+- **Alt + A**：开关下载拦截
 
-### 从 GitHub 安装
-1. 访问 [Releases 页面](https://github.com/alexhua/Aria2-Explorer/releases) 下载最新的 `.crx` 文件
-2. 打开 Chrome 并导航到 `chrome://extensions/`
-3. 启用"开发者模式"（右上角开关）
-4. 将下载的 `.crx` 文件拖拽到扩展页面完成安装
+可以在 `chrome://extensions/shortcuts` 修改快捷键。
 
-## 🔑 键盘快捷键
+## 其他扩展调用
 
-- **Alt + A**：切换下载捕获
-- **Alt + X**：启动 Aria2（仅 Windows）
-
-*在 `chrome://extensions/shortcuts` 自定义快捷键*
-
-## 🧩 外部调用
-
-允許其他擴展使用這個擴展作為與 Aria2 的中介軟體來下載檔案。  
+其他扩展可以把下载请求发给本扩展，再由它交给 aria2。把下面的 id 换成扩展页面里本扩展的 id。
 
 ```js
-
 const downloadItem = {
     url: "https://sample.com/image.jpg",
     filename: "image_from_sample.jpg",
     referrer: "https://sample.com",
-    options: { 
-        split: "10", // aria2 RPC options here
-        xxxxx: "oooo"
+    options: {
+        split: "10"
     }
 }
 
-chrome.runtime.sendMessage(`Aria2-Explorer extension ID`, downloadItem)
-
+chrome.runtime.sendMessage("extension id", downloadItem)
 ```
 
-## 📝 许可证
+## 出处
 
-本项目采用 BSD 3-Clause 许可证 - 详见 [LICENSE](LICENSE) 文件。
+本分支基于 Alex Hua 的 Aria2 Explorer：
 
-## 🙏 致谢
+https://github.com/alexhua/Aria2-Explorer
 
-- [Aria2](https://aria2.github.io/) - 强大的下载工具
-- [AriaNg](https://github.com/mayswind/AriaNg) - Aria2 的现代 Web 前端
-- 所有贡献者和用户
+同时使用 [aria2](https://aria2.github.io/) 和 [AriaNg](https://github.com/mayswind/AriaNg)。
 
-## 📮 支持
+## 许可证
 
-- **问题反馈**：[GitHub Issues](https://github.com/alexhua/Aria2-Explorer/issues)
-- **官网**：[https://aria2e.com](https://aria2e.com)
-- **邮箱**：通过 GitHub 联系
-
----
-
-<div align="center">
-
-**用 ❤️ 制作 by Alex Hua**
-
-⭐ 在 GitHub 上给我们一个星标 — 这对我们很有帮助！
-
-[🇺🇸 English Documentation](./README.md)
-
-</div>
+BSD 3-Clause。见 [LICENSE](LICENSE)。该文件中的版权声明仍是 Alex Hua 的。

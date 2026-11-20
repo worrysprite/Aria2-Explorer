@@ -31,7 +31,7 @@ class Application {
         const uiManager = new UIManager();
         const downloadManager = new DownloadManager(uiManager, notificationManager);
         const captureManager = new CaptureManager(downloadManager);
-        const menuManager = new MenuManager(contextMenus, downloadManager, uiManager, monitorManager);
+        const menuManager = new MenuManager(contextMenus, downloadManager, uiManager);
 
         // 3. Create event handler
         const eventHandler = new EventHandler({

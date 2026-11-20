@@ -206,9 +206,6 @@
    "openWebUIStr": {
       "message": "Apri interfaccia principale"
    },
-   "startAria2Str": {
-      "message": "Avvia Aria2"
-   },
    "toggleCapture": {
       "message": "Attiva/disattiva cattura download"
    },
@@ -277,9 +274,6 @@
    },
    "ManualDownloadCookiesTooltipDes": {
       "message": "Devi decidere se eliminare i cookie relativi al sito quando chiedi le impostazioni di download."
-   },
-   "Aria2ManagerPromotionDes": {
-      "message": "Sembra che Aria2 Manager non sia installato, vuoi accedere al canale 'Alex Recommends' per maggiori informazioni?"
    },
    "ResetSettingsDes": {
       "message": "Confermare il ripristino della configurazione dell'estensione ai valori predefiniti?"

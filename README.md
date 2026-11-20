@@ -1,5 +1,7 @@
 # Aria2 Explorer
 
+[中文](./README.cn.md)
+
 Personal fork of [Aria2 Explorer](https://github.com/alexhua/Aria2-Explorer) by Alex Hua.
 
 This is a Chrome and Edge extension that hands browser downloads to aria2 and includes an AriaNg interface for managing tasks. It talks to a local aria2 RPC (typically `127.0.0.1:6800`). The download directory comes from aria2, not from a path baked into the extension.
@@ -18,9 +20,9 @@ The Download Dir link on the task detail page for a local Windows RPC uses the s
 
 ### Toolbar icon menu
 
-Right-clicking the extension icon no longer shows **启动Aria2** (Start Aria2). That item was registered by the extension on Windows when the first RPC server is localhost. Alt+X still launches Aria2 on Windows. The other items this extension adds (download capture, monitoring, site filters, RPC selection, and page export) stay as they are. On setups where Start Aria2 was not shown, **Open Web UI** is still there.
+This fork does not add a **启动Aria2** (Start Aria2) item, and it does not register an Alt+X command. Open Web UI stays on the toolbar menu, together with download capture, monitoring, site filters, and RPC selection.
 
-Chrome and Edge also insert their own row titled **Aria2 Explorer**, the extension name from the manifest. This fork does not register that row. It links to the extension homepage, and the extensions API does not provide a way to delete it.
+Chrome and Edge insert their own row titled **Aria2 Explorer**, using the extension name. That row opens the manifest `homepage_url`. This fork sets it to https://github.com/worrysprite/Aria2-Explorer, so the built-in row opens this repository. The extension does not add a second item with the same title.
 
 ## What the extension does
 
@@ -42,7 +44,6 @@ Load this fork as an unpacked extension:
 ## Keyboard shortcuts
 
 - **Alt + A**: Toggle download capture
-- **Alt + X**: Launch Aria2 (Windows only)
 
 Shortcuts can be changed at `chrome://extensions/shortcuts`.
 

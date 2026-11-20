@@ -206,9 +206,6 @@
    "openWebUIStr": {
       "message": "Открыть веб-интерфейс"
    },
-   "startAria2Str": {
-      "message": "Запустить Aria2"
-   },
    "toggleCapture": {
       "message": "Переключить захват загрузки"
    },
@@ -277,9 +274,6 @@
    },
    "ManualDownloadCookiesTooltipDes": {
       "message": "Вы должны решить, удалять ли связанные Cookies веб-сайта при запросе настроек загрузки."
-   },
-   "Aria2ManagerPromotionDes": {
-      "message": "Похоже, Aria2 Manager не установлен, хотите перейти в канал 'Alex Recommends' для получения дополнительной информации?"
    },
    "ResetSettingsDes": {
       "message": "Подтвердить сброс конфигурации расширения до значений по умолчанию?"

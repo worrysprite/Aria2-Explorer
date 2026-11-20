@@ -3,16 +3,14 @@
  */
 import exportAllLinks from "../content/exportAll.js";
 import Logger from "../logger.js";
-import Utils from "../utils.js";
 import { ConfigService } from "../services/ConfigService.js";
 
 export class MenuManager {
-    constructor(contextMenus, downloadManager, uiManager, monitorManager) {
+    constructor(contextMenus, downloadManager, uiManager) {
         this.configService = ConfigService.getInstance();
         this.contextMenus = contextMenus;
         this.downloadManager = downloadManager;
         this.uiManager = uiManager;
-        this.monitorManager = monitorManager;
         this.currentTabUrl = "about:blank";
         this.lastHostname = "";
 
@@ -97,17 +95,12 @@ export class MenuManager {
             contexts: ["action"]
         });
 
-        // Open Web UI except on local Windows, where this slot used to be
-        // "Start Aria2". Starting Aria2 stays on the Alt+X command only.
-        const remoteAria2List = this.monitorManager.getRemoteAria2List();
-        if (!(Utils.getPlatform() === "Windows" && remoteAria2List[0]?.isLocalhost)) {
-            this.contextMenus.create({
-                type: "normal",
-                id: "MENU_OPEN_WEB_UI",
-                title: '🪟 ' + chrome.i18n.getMessage("openWebUIStr"),
-                contexts: ["action"]
-            });
-        }
+        this.contextMenus.create({
+            type: "normal",
+            id: "MENU_OPEN_WEB_UI",
+            title: '🪟 ' + chrome.i18n.getMessage("openWebUIStr"),
+            contexts: ["action"]
+        });
 
         // Website filter
         this.#createWebsiteFilterMenu();

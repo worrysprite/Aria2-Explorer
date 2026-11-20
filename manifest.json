@@ -6,7 +6,7 @@
    "minimum_chrome_version": "116.0.0",
    "default_locale": "en",
    "description": "__MSG_description__",
-   "homepage_url": "https://aria2e.com",
+   "homepage_url": "https://github.com/worrysprite/Aria2-Explorer",
    "options_page": "options.html",
    "permissions": [
       "cookies",
@@ -54,12 +54,6 @@
             "default": "Alt+A"
          },
          "description": "__MSG_toggleCapture__"
-      },
-      "launch-aria2": {
-         "suggested_key": {
-            "default": "Alt+X"
-         },
-         "description": "__MSG_startAria2Str__"
       }
    },
    "externally_connectable": {
