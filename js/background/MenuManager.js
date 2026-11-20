@@ -97,16 +97,10 @@ export class MenuManager {
             contexts: ["action"]
         });
 
-        // Start Aria2 or open WebUI
+        // Open Web UI except on local Windows, where this slot used to be
+        // "Start Aria2". Starting Aria2 stays on the Alt+X command only.
         const remoteAria2List = this.monitorManager.getRemoteAria2List();
-        if (Utils.getPlatform() === "Windows" && remoteAria2List[0]?.isLocalhost) {
-            this.contextMenus.create({
-                type: "normal",
-                id: "MENU_START_ARIA2",
-                title: '⚡️ ' + chrome.i18n.getMessage("startAria2Str"),
-                contexts: ["action"]
-            });
-        } else {
+        if (!(Utils.getPlatform() === "Windows" && remoteAria2List[0]?.isLocalhost)) {
             this.contextMenus.create({
                 type: "normal",
                 id: "MENU_OPEN_WEB_UI",
@@ -278,10 +272,6 @@ export class MenuManager {
         switch (true) {
             case info.menuItemId === "MENU_OPEN_WEB_UI":
                 await this.uiManager.launchUI(tab);
-                break;
-
-            case info.menuItemId === "MENU_START_ARIA2":
-                await chrome.tabs.create({ url: chrome.runtime.getURL('aria2.html') });
                 break;
 
             case info.menuItemId === "MENU_CAPTURE_DOWNLOAD":
