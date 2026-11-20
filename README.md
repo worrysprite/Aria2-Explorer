@@ -1,127 +1,83 @@
 # Aria2 Explorer
 
-<div align="center">
+[中文](./README.cn.md)
 
-![Logo](images/logo128.png)
+Personal fork of [Aria2 Explorer](https://github.com/alexhua/Aria2-Explorer) by Alex Hua.
 
-**A powerful Chrome extension for seamless Aria2 integration**
+This is a Chrome and Edge extension that hands browser downloads to aria2 and includes an AriaNg interface for managing tasks. It talks to a local aria2 RPC (typically `127.0.0.1:6800`). The download directory comes from aria2, not from a path baked into the extension.
 
-[![Chrome Web Store](https://img.shields.io/badge/Chrome-Web%20Store-red?logo=google-chrome)](https://chromewebstore.google.com/detail/mpkodccbngfoacfalldjimigbofkhgjn)
-[![License](https://img.shields.io/badge/license-BSD--3--Clause-green.svg)](LICENSE)
-[![Version](https://img.shields.io/github/v/release/alexhua/Aria2-Explorer.svg?color=gold)](manifest.json)
+## Fork changes
 
-[English](#english) | [中文](./README.cn.md)
+### Open the download directory
 
-</div>
+The folder button on a task opens that task's aria2 directory. The UI already receives the directory as the task status field `dir` (aria2's global `dir` when the task does not set its own). The button uses that path. It does not ask you to install DownHub.
 
----
+On Windows, with no custom "Download Folder Open Handler URL" saved for the RPC profile, the button opens Explorer through Windows' built-in `search-ms` protocol, scoped to that directory. Nothing else has to be installed. The first time, Chrome or Edge may ask to open an external application; allow it, and Explorer shows the folder.
 
-## 📖 Overview
+If a custom open-handler URL is already saved on the RPC profile, that URL is still used. A failed handler does not show the DownHub install dialog.
 
-Aria2 Explorer is a feature-rich Chrome extension that seamlessly integrates Aria2 download manager into your browser. It automatically captures downloads, monitors Aria2 status, and provides a beautiful web UI for managing your downloads.
+The Download Dir link on the task detail page for a local Windows RPC uses the same URL.
 
-## ✨ Key Features
+### No promotional feeds
 
-### 🎯 Smart Download Capture
-- **Automatic Interception**: Captures browser downloads based on file size and type
-- **Flexible Filtering**: Whitelist/blacklist by domain and file extension
-- **Alt-Key Override**: Hold Alt while clicking to bypass capture
-- **Multi-URL Support**: Handle multiple download URLs simultaneously
+The main UI does not open the Official Blog / Alex Recommends page and does not fetch notice or recommend data from aria2e.com.
 
-### 📊 Real-time Monitoring
-- **Live Status**: Monitor active, waiting, and completed tasks
-- **Speed Display**: Real-time upload/download speed in badge
-- **Multi-Server**: Support monitoring multiple Aria2 servers
-- **Smart Intervals**: Adaptive polling based on activity
+### Toolbar icon menu
 
-### 🎨 Beautiful Interface
-- **Integrated WebUI**: Built-in AriaNg interface
-- **Multiple Modes**: Open as popup, tab, window, or side panel
-- **Dark Mode**: System-aware theme switching
-- **Animated Icons**: Visual feedback for download states
+This fork does not add a **启动Aria2** (Start Aria2) item, and it does not register an Alt+X command. Open Web UI stays on the toolbar menu, together with download capture, monitoring, site filters, and RPC selection.
 
-### 🔧 Advanced Configuration
-- **Multiple RPC Servers**: Configure and switch between servers
-- **Pattern Matching**: Auto-select server based on URL patterns
-- **Cookie Support**: Automatic cookie forwarding for authenticated downloads
-- **Custom Headers**: Add custom headers to download requests
+Chrome and Edge insert their own row titled **Aria2 Explorer**, using the extension name. That row opens the manifest `homepage_url`. This fork sets it to https://github.com/worrysprite/Aria2-Explorer, so the built-in row opens this repository. The extension does not add a second item with the same title.
 
-### 🌐 Context Menu Integration
-- **Quick Export**: Right-click links to send to Aria2
-- **Batch Export**: Export all links from current page
-- **Site Filtering**: Quick add/remove sites from whitelist/blacklist
-- **Server Selection**: Choose target server from context menu
+## What the extension does
 
-### 🔔 Smart Notifications
-- **Task Status**: Get notified on download complete/error
-- **Silent Mode**: Optional silent notifications
-- **Custom Messages**: Detailed context in notifications
-- **Click Actions**: Click notification to open WebUI
+- Captures browser downloads by file size, with domain and extension allow and block lists. Hold Alt while clicking a link to skip capture.
+- Monitors one or more aria2 servers and can show speed and task counts on the toolbar icon.
+- Opens the built-in AriaNg UI as a popup, tab, window, or side panel.
+- Exports a link, a selection, or the links on the current page to aria2 from the page context menu.
+- Can accept a download request from another extension.
 
-## 🚀 Installation
+## Install
 
-### From Web Store (Recommended)
+Load this fork as an unpacked extension:
 
-[![Chrome Web Store](https://aria2e.com/assets/badges/chrome-web-store.png)](https://chromewebstore.google.com/detail/mpkodccbngfoacfalldjimigbofkhgjn)
-<a href="https://microsoftedge.microsoft.com/addons/detail/ngojgbdekanmijaphecgpmfoegoanffi"><img src="https://aria2e.com/assets/badges/microsoft-en-light.svg" alt="Edge Add-ons Store" height="59"></a>
+1. Clone this repository.
+2. Open `chrome://extensions` or `edge://extensions`.
+3. Turn on Developer mode.
+4. Choose "Load unpacked" and select this directory.
 
-### From GitHub
-1. Visit the [Releases page](https://github.com/alexhua/Aria2-Explorer/releases) and download the latest `.crx` file
-2. Open Chrome and navigate to `chrome://extensions/`
-3. Enable "Developer mode" (toggle in the top right corner)
-4. Drag and drop the downloaded `.crx` file onto the extensions page to install
+Version 1.0.0 is packed as `dist/Aria2-Explorer.crx` and published on the [1.0.0 release](https://github.com/worrysprite/Aria2-Explorer/releases/tag/v1.0.0). The private key that signed it is not in the repository. Current Chrome and Edge reject a CRX that did not come from their stores, so drag-and-drop can fail with a store-proof error. When that happens, use Load unpacked. This package's extension id is `opnhjpcmcbfpcnkpegecedkdekkgppda`. A later pack without the same key gets a different id.
 
-## 🔑 Keyboard Shortcuts
+## Keyboard shortcuts
 
 - **Alt + A**: Toggle download capture
-- **Alt + X**: Launch Aria2 (Windows only)
 
-*Customize shortcuts at `chrome://extensions/shortcuts`*
+Shortcuts can be changed at `chrome://extensions/shortcuts`.
 
-## 🧩 Integration
+## Calls from another extension
 
-Allow other extensions to use this extension as middleware to download files with Aria2.
+Another extension can ask this one to send a file to aria2. Replace the id with this extension's id from the extensions page.
 
 ```js
-
 const downloadItem = {
     url: "https://sample.com/image.jpg",
     filename: "image_from_sample.jpg",
     referrer: "https://sample.com",
-    options: { 
-        split: "10", // aria2 RPC options here
-        xxxxx: "oooo"
+    options: {
+        split: "10"
     }
 }
 
-chrome.runtime.sendMessage(`Aria2-Explorer extension ID`, downloadItem)
-
+chrome.runtime.sendMessage("extension id", downloadItem)
 ```
 
-## 📝 License
+## Credit
 
-This project is licensed under the BSD 3-Clause License - see the [LICENSE](LICENSE) file for details.
+This fork is based on Aria2 Explorer by Alex Hua:
 
-## 🙏 Acknowledgments
+https://github.com/alexhua/Aria2-Explorer
 
-- [Aria2](https://aria2.github.io/) - The amazing download utility
-- [AriaNg](https://github.com/mayswind/AriaNg) - Modern web frontend for Aria2
-- All contributors and users
+It also uses [aria2](https://aria2.github.io/) and [AriaNg](https://github.com/mayswind/AriaNg).
 
-## 📮 Support
+## License
 
-- **Issues**: [GitHub Issues](https://github.com/alexhua/Aria2-Explorer/issues)
-- **Website**: [https://aria2e.com](https://aria2e.com)
-- **Email**: Contact through GitHub
-
----
-
-<div align="center">
-
-**Made with ❤️ by Alex Hua**
-
-⭐ Star us on GitHub — it helps!
-
-[🇨🇳 中文文档](./README.cn.md)
-
-</div>
+BSD 3-Clause. See [LICENSE](LICENSE). The copyright notice in that file remains Alex Hua's.

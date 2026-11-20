@@ -104,9 +104,6 @@ export class EventHandler {
             if (command === "toggle-capture") {
                 const current = this.configService.get('integration');
                 await this.configService.set({ integration: !current });
-            } else if (command === "launch-aria2") {
-                const url = chrome.runtime.getURL('aria2.html');
-                chrome.tabs.create({ url });
             }
         });
     }

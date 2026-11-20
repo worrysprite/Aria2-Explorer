@@ -206,9 +206,6 @@
    "openWebUIStr": {
       "message": "メイン画面を開く"
    },
-   "startAria2Str": {
-      "message": "スタートAria2"
-   },
    "toggleCapture": {
       "message": "ダウンロードキャプチャの切り替え"
    },
@@ -277,9 +274,6 @@
    },
    "ManualDownloadCookiesTooltipDes": {
       "message": "ダウンロード設定を尋ねる際に、関連するウェブサイトのクッキーを削除するかどうかを決定する必要があります。"
-   },
-   "Aria2ManagerPromotionDes": {
-      "message": "Aria2 Managerはインストールされていないようですが、詳細については、Alex推奨チャネルにアクセスしてください？"
    },
    "ResetSettingsDes": {
       "message": "拡張機能の設定をデフォルト値にリセットしますか？"

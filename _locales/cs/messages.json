@@ -206,9 +206,6 @@
    "openWebUIStr": {
       "message": "Otevřít webové rozhraní"
    },
-   "startAria2Str": {
-      "message": "Spustit Aria2"
-   },
    "toggleCapture": {
       "message": "Přepnout zachytávání stahování"
    },
@@ -277,9 +274,6 @@
    },
    "ManualDownloadCookiesTooltipDes": {
       "message": "Při dotazování na nastavení stahování byste měli určit, zda smazat související cookies webových stránek."
-   },
-   "Aria2ManagerPromotionDes": {
-      "message": "Zdá se, že Aria2 Manager není nainstalován, přístup k kanálu \"Alex Recommends\" pro více informací?"
    },
    "ResetSettingsDes": {
       "message": "Potvrdit resetování konfigurace rozšíření na výchozí hodnoty?"

@@ -3,16 +3,14 @@
  */
 import exportAllLinks from "../content/exportAll.js";
 import Logger from "../logger.js";
-import Utils from "../utils.js";
 import { ConfigService } from "../services/ConfigService.js";
 
 export class MenuManager {
-    constructor(contextMenus, downloadManager, uiManager, monitorManager) {
+    constructor(contextMenus, downloadManager, uiManager) {
         this.configService = ConfigService.getInstance();
         this.contextMenus = contextMenus;
         this.downloadManager = downloadManager;
         this.uiManager = uiManager;
-        this.monitorManager = monitorManager;
         this.currentTabUrl = "about:blank";
         this.lastHostname = "";
 
@@ -97,23 +95,12 @@ export class MenuManager {
             contexts: ["action"]
         });
 
-        // Start Aria2 or open WebUI
-        const remoteAria2List = this.monitorManager.getRemoteAria2List();
-        if (Utils.getPlatform() === "Windows" && remoteAria2List[0]?.isLocalhost) {
-            this.contextMenus.create({
-                type: "normal",
-                id: "MENU_START_ARIA2",
-                title: '⚡️ ' + chrome.i18n.getMessage("startAria2Str"),
-                contexts: ["action"]
-            });
-        } else {
-            this.contextMenus.create({
-                type: "normal",
-                id: "MENU_OPEN_WEB_UI",
-                title: '🪟 ' + chrome.i18n.getMessage("openWebUIStr"),
-                contexts: ["action"]
-            });
-        }
+        this.contextMenus.create({
+            type: "normal",
+            id: "MENU_OPEN_WEB_UI",
+            title: '🪟 ' + chrome.i18n.getMessage("openWebUIStr"),
+            contexts: ["action"]
+        });
 
         // Website filter
         this.#createWebsiteFilterMenu();
@@ -278,10 +265,6 @@ export class MenuManager {
         switch (true) {
             case info.menuItemId === "MENU_OPEN_WEB_UI":
                 await this.uiManager.launchUI(tab);
-                break;
-
-            case info.menuItemId === "MENU_START_ARIA2":
-                await chrome.tabs.create({ url: chrome.runtime.getURL('aria2.html') });
                 break;
 
             case info.menuItemId === "MENU_CAPTURE_DOWNLOAD":
