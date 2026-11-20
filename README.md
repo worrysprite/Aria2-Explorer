@@ -18,6 +18,10 @@ If a custom open-handler URL is already saved on the RPC profile, that URL is st
 
 The Download Dir link on the task detail page for a local Windows RPC uses the same URL.
 
+### No promotional feeds
+
+The main UI does not open the Official Blog / Alex Recommends page and does not fetch notice or recommend data from aria2e.com.
+
 ### Toolbar icon menu
 
 This fork does not add a **启动Aria2** (Start Aria2) item, and it does not register an Alt+X command. Open Web UI stays on the toolbar menu, together with download capture, monitoring, site filters, and RPC selection.

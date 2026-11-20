@@ -18,6 +18,10 @@
 
 本地 Windows RPC 的任务详情页里，Download Dir 链接使用同一个地址。
 
+### 没有推荐和公告
+
+主界面不再打开 Official Blog / Alex Recommends 页面，也不会向 aria2e.com 拉取公告或推荐数据。
+
 ### 工具栏图标右键菜单
 
 本分支不再添加 **启动Aria2**（Start Aria2），也不再注册 Alt+X 快捷键。工具栏菜单里仍然保留打开主界面、下载拦截、状态监测、网站过滤和 RPC 选择。
